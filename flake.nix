@@ -1,6 +1,8 @@
 {
-  inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
-  inputs.flake-utils.url = github:poscat0x04/flake-utils;
+  inputs = {
+    nixpkgs.url = "git+ssh://git@github.com/NixOS/nixpkgs?ref=nixos-unstable&shallow=1";
+    flake-utils.url = "git+ssh://git@github.com/poscat0x04/flake-utils?shallow=1";
+  };
 
   outputs = { self, nixpkgs, flake-utils, ... }: with flake-utils;
     eachDefaultSystem (
