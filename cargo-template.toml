@@ -1,0 +1,24 @@
+[placeholders.github_username]
+prompt = "Your github username"
+type = "string"
+
+[placeholders.nix]
+prompt = "Enable nix files"
+type = "bool"
+
+[placeholders.exe]
+prompt = "Enable executable targets"
+type = "bool"
+
+[placeholders.test]
+prompt = "Enable tests"
+type = "bool"
+
+[placeholders.bench]
+prompt = "Enable benchmarks"
+type = "bool"
+
+[placeholders.cabal-fmt]
+prompt = "Add cabal-fmt 'expand src' hints"
+type = "bool"
+

@@ -1,0 +1,16 @@
+cradle:
+  cabal:
+    - path: "./src"
+      component: "lib:{{ project-name }}"
+    {% if test %}
+    - path: "./test"
+      component: "test:{{ project-name }}-test"
+    {% endif %}
+    {% if exe %}
+    - path: "./app"
+      component: "exe:{{ project-name }}"
+    {% endif %}
+    {% if bench %}
+    - path: "./benchmark"
+      component: "bench:{{ project-name }}-bench"
+    {% endif %}

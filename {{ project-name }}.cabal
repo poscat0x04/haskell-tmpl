@@ -1,0 +1,94 @@
+cabal-version:   3.0
+name:            {{ project-name }}
+version:         {{ version }}
+
+-- synopsis:
+-- description:
+-- category:
+license:         {{ license }}
+license-file:    LICENSE
+author:          {{ username }}
+maintainer:      {{ authors }}
+copyright:       Copyright (c) {{ username }} {{ "now" | date: "%Y" }}
+stability:       alpha
+homepage:        https://github.com/{{ github-sername }}/{{ project-name }}
+bug-reports:     https://github.com/{{ github-sername }}/{{ project-name }}/issues
+extra-doc-files:
+  CHANGELOG.md
+  README.md
+
+common common-attrs
+  build-depends:
+    , base        >=4.10 && <5
+
+  default-language:  GHC2021
+  default-extensions:
+    NoStarIsType
+    ConstraintKinds
+    DataKinds
+    DefaultSignatures
+    DerivingStrategies
+    DuplicateRecordFields
+    FunctionalDependencies
+    GADTs
+    LambdaCase
+    MultiWayIf
+    NamedFieldPuns
+    OverloadedStrings
+    PartialTypeSignatures
+    PatternSynonyms
+    QuantifiedConstraints
+    RecordWildCards
+    RoleAnnotations
+    StandaloneKindSignatures
+    TypeFamilies
+    TypeFamilyDependencies
+    TypeOperators
+    ViewPatterns
+
+library
+  import:          common-attrs
+  build-depends:
+
+{% if cabal-fmt %}
+  -- cabal-fmt: expand src
+{% endif %}
+  exposed-modules:
+
+  other-modules:
+  hs-source-dirs:  src
+
+{% if exe %}
+executable {{ project-name }}
+  import:          common-attrs
+  build-depends:
+    , {{ project-name }}
+
+  hs-source-dirs:  app
+  main-is:         Main.hs
+
+{% endif %}
+{% if test %}
+test-suite {{ project-name }}-test
+  import:          common-attrs
+  type:            exitcode-stdio-1.0
+  build-depends:
+    , {{ project-name }}
+
+  hs-source-dirs:  test
+  main-is:         Spec.hs
+
+{% endif %}
+{% if bench %}
+benchmark {{ project-name }}-bench
+  import:          common-attrs
+  type:            exitcode-stdio-1.0
+  build-depends:
+    , {{ project-name }}
+
+  hs-source-dirs:  benchmark
+  main-is:         Bench.hs
+{% endif %}
+source-repository head
+  type:     git
+  location: https://github.com/{{ github-sername }}/{{ project-name }}
